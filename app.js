@@ -30,7 +30,7 @@ app.use('/accounts', passport.authenticate('jwt', {session: false}), accountsRou
 app.use('/login', loginRouter);
 app.use('/auth', authRouter);
 app.use('/assignment',  passport.authenticate('jwt', {session: false}), assignmentRouter);
-app.use('/grades', gradeRouter);
+app.use('/grades', passport.authenticate('jwt', {session: false}), gradeRouter);
 app.use('/sendEmail', passport.authenticate('jwt', {session: false}), emailRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
