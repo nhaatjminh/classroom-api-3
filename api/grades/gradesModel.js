@@ -24,3 +24,9 @@ exports.getAssignmentGrades = (idAssign) => db.execute(
      FROM grades 
      WHERE assignment_id = '${idAssign}'`
 );
+
+exports.updateGrade= (gradeObj) => db.execute(
+    `UPDATE grades
+     SET grade ='${gradeObj.grade}'
+     WHERE assignment_id = '${gradeObj.assignment_id}' and student_id = ${gradeObj.student_id}`
+);
