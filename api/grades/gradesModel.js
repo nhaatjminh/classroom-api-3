@@ -18,7 +18,6 @@ exports.getOneMember = (studentid) => db.execute(
     + "FROM accounts " 
     + ` WHERE studentID = '${studentid}'`
 )
-);
 
 exports.getAssignmentGrades = (idAssign) => db.execute(
     `SELECT student_id, grade 
