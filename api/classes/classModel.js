@@ -25,4 +25,9 @@ exports.getMembersByClassId = (classId, role) => db.execute(
     + "FROM accounts as acc JOIN class_accounts as ca "
     + "ON acc.id = ca.id_account "
     + `WHERE ca.role = '${role}' and ca.id_class = ${classId}`
-);    
+);
+
+exports.addStudent = (studentObj) => db.execute(
+    `INSERT INTO student (student_id, class_id, fullname) 
+    VALUES ('${studentObj.student_id}', '${studentObj.class_id}', '${studentObj.fullname}');`
+)
