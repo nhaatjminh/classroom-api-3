@@ -15,3 +15,7 @@ exports.isCreatorOfClass = async (teacherId, classId) => {
 }
 
 exports.getMembersByClassId = (classId, role) => classesModel.getMembersByClassId(classId, role);
+
+exports.addStudent = (class_id, studentObj) => classesModel.addStudent(class_id, studentObj);
+
+exports.deleteStudentsFromClass = (class_id) => classesModel.deleteStudentsFromClass(class_id);

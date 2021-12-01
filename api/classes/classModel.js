@@ -27,7 +27,12 @@ exports.getMembersByClassId = (classId, role) => db.execute(
     + `WHERE ca.role = '${role}' and ca.id_class = ${classId}`
 );
 
-exports.addStudent = (studentObj) => db.execute(
+exports.addStudent = (class_id, studentObj) => db.execute(
     `INSERT INTO student (student_id, class_id, fullname) 
-    VALUES ('${studentObj.student_id}', '${studentObj.class_id}', '${studentObj.fullname}');`
+    VALUES ('${studentObj.student_id}', '${class_id}', '${studentObj.fullname}');`
+)
+
+exports.deleteStudentsFromClass = (class_id) => db.execute(
+    `DELETE FROM students 
+    WHERE (class_id = '${class_id}');`
 )

@@ -94,7 +94,7 @@ exports.acceptlink = async function(req,res) {
     
 }
 
-exports.getListMember = async function(req,res) {
+exports.addListStudent = async function(req,res) {
     const isTeacher = await Authorization.teacherAuthority(req.user.id, req.params.idClass);
     if (!isTeacher){
         res.status(404).json({message: "Authorization Secure Error!"});
@@ -102,13 +102,12 @@ exports.getListMember = async function(req,res) {
         const listStudent = req.body.listStudent;
         let successList = [];
 
-        listStudent.forEach(element => {
-            const exist = await classMemberService.findOneAcc(element.id, req.params.idClass);
-            if (exist.length <= 0) {
-                await classMemberService.addClassMember(req.params.idClass, element.id, "student");
-                successList.push(element);
-            } 
-        });
+        await classService.deleteStudentsFromClass(req.params.idClass);
+
+        for (let i = 0; i < listStudent.length; i++) {
+            await classService.addStudent(req.params.idClass, listStudent[i]);
+            successList.push(listStudent[i]);
+        }
 
         if (successList.length > 0) {
             return res.status(201).json({message: 'List member added!', successList: successList});
