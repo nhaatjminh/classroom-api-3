@@ -30,3 +30,8 @@ exports.updateGrade= (gradeObj) => db.execute(
      SET grade ='${gradeObj.grade}'
      WHERE assignment_id = '${gradeObj.assignment_id}' and student_id = ${gradeObj.student_id}`
 );
+
+exports.addGrade = (gradeObj) => db.execute(
+    `INSERT INTO grades (assignment_id, student_id, grade) 
+    VALUES ('${gradeObj.assignment_id}', '${gradeObj.student_id}', '${gradeObj.grade}');`
+);

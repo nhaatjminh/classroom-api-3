@@ -40,7 +40,9 @@ exports.updateGrade = async (req, res) => {
             grade: req.body.grade
         }
         const result = await gradeService.updateGrade(gradeObj);
-
+        if (result.affectedRows === 0) {
+            result = await gradeService.addGrade(gradeObj);
+        }
         if (result) {
             res.status(200).json(result);
         } else {
