@@ -4,9 +4,9 @@ exports.getListGrade = (classID) => db.execute(
     "SELECT C.name, B.grade, C.studentID as student_id , A.id as assignment_id" 
     +  ` FROM assignments as A  
     JOIN grades as B ON A.id = B.assignment_id 
-    JOIN accounts as C ON C.id = B.student_id  WHERE A.class_id = '${classID}'`
-
+    JOIN accounts as C ON C.studentID = B.student_id  WHERE A.class_id = '${classID}'`
 )
+
 exports.getMembers = (classID) => db.execute(
     "SELECT acc.id, acc.name, acc.studentID "
     + "FROM accounts as acc JOIN class_accounts as ca "
