@@ -11,4 +11,6 @@ router.get('/onemember/:studentid', gradeController.getOneMember);
 router.get('/:idClass/:idAssign', gradeController.getAssignmentGrades)
 router.post('/update/:idClass/:idAssign', gradeController.updateGrade);
 
+router.post('/uploadGrades/:idClass/:idAssign', gradeController.uploadGrades);
+
 module.exports = router;

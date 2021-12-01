@@ -51,3 +51,9 @@ exports.addGrade = (gradeObj) => db.execute(
     `INSERT INTO grades (assignment_id, student_id, grade) 
     VALUES ('${gradeObj.assignment_id}', '${gradeObj.student_id}', '${gradeObj.grade}');`
 );
+
+exports.getListStudentGrades = (idAssign) => db.execute(
+    `SELECT student_id
+     FROM grades 
+     WHERE assignment_id = '${idAssign}'`
+);
