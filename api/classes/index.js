@@ -14,6 +14,7 @@ router.get('/detail/:id', classController.detail);
 router.get('/invitelink/:id/:role', classController.inviteLink);
 
 router.get('/members/:id', classController.getMember);
+router.post('/uploadListMember/:idClass', classController.getListMember);
 
 router.get('/acceptlink/:tokenlink/:tokenid',classController.acceptlink);
 module.exports = router;

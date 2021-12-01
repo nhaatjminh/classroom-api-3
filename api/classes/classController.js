@@ -1,5 +1,6 @@
 const classService = require('./classService');
 const classMemberService = require('./classMemberService');
+const Authorization = require('../../modules/authorization');
 const jwt_decode = require('jwt-decode');
 const jwt = require('jsonwebtoken');
 
@@ -91,4 +92,28 @@ exports.acceptlink = async function(req,res) {
         res.json("Account Exists in class");
     }
     
+}
+
+exports.getListMember = async function(req,res) {
+    const isTeacher = await Authorization.teacherAuthority(req.user.id, req.params.idClass);
+    if (!isTeacher){
+        res.status(404).json({message: "Authorization Secure Error!"});
+    } else {
+        const listStudent = req.body.listStudent;
+        let successList = [];
+
+        listStudent.forEach(element => {
+            const exist = await classMemberService.findOneAcc(element.id, req.params.idClass);
+            if (exist.length <= 0) {
+                await classMemberService.addClassMember(req.params.idClass, element.id, "student");
+                successList.push(element);
+            } 
+        });
+
+        if (successList.length > 0) {
+            return res.status(201).json({message: 'List member added!', successList: successList});
+        } else {
+            return res.status(404).json("All member exist in class");
+        }
+    }
 }
