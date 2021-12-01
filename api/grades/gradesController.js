@@ -3,12 +3,19 @@ const Authorization = require('../../modules/authorization');
 
 exports.getListGrade = async function(req, res) {
     let a = await gradeService.getListGrade(req.params.idclass);
+    let b = await gradeService.getListGradeOfStudentDontHaveAccount(req.params.idclass);
+    a = a.concat(b);
     res.json(a);
 }
 exports.getMembers = async function(req, res) {
     let a = await gradeService.getMembers(req.params.idclass);
     res.json(a);
 }
+
+exports.getMembersHaveAccount = async function(req, res) {
+    let a = await gradeService.getMembersHaveAccount(req.params.idclass);
+    res.json(a);
+} 
 exports.getOneMember = async function(req, res) {
     let a = await gradeService.getOneMember(req.params.studentid);
     res.json(a);
