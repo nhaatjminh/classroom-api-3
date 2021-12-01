@@ -28,8 +28,8 @@ exports.getMembersByClassId = (classId, role) => db.execute(
 );
 
 exports.addStudent = (class_id, studentObj) => db.execute(
-    `INSERT INTO student (student_id, class_id, fullname) 
-    VALUES ('${studentObj.student_id}', '${class_id}', '${studentObj.fullname}');`
+    `INSERT INTO students (student_id, class_id, fullname) 
+    VALUES ('${studentObj.id}', '${class_id}', '${studentObj.name}');`
 )
 
 exports.deleteStudentsFromClass = (class_id) => db.execute(
